@@ -1,0 +1,26 @@
+[
+    {
+        "id":0,
+        "name":"sasi",
+        "surname":"yedindla",
+        "occupation":"MERN"
+    },
+    {
+        "id":1,
+        "name":"hari",
+        "surname":"dasari",
+        "occupation":"Data Analyst"
+    },
+    {
+        "id":2,
+        "name":"Ranjith",
+        "surname":"Dasri",
+        "occupation":"Data Engineer"
+    },
+    {
+        "id":3,
+        "name":"Chinnu",
+        "surname":"Maligi",
+        "occupation":"Senior analyst"
+    }
+]
