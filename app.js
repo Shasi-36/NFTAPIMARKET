@@ -30,20 +30,20 @@ app.get("/api/v1/nfts", (req, res) => {
 // POST REQUEST
 
 app.post("/api/v1/nfts", (req, res) => {
-  const newId = nfts[nfts.length - 1] + 1;
+  const newId = nfts.length - 1 + 1;
+  console.log(newId);
   const newNFTs = Object.assign({ id: newId }, req.body);
   nfts.push(newNFTs);
+  console.log(nfts);
 
-  fs.watchFile(
+  fs.writeFile(
     `${__dirname}/NFTDATA/Data/nft_sample.json`,
     JSON.stringify(nfts),
     (err) => {
       res.status(201).json({
         status: "Ok",
         result: nfts.length,
-        data: {
-          nft: newNFTs,
-        },
+        nft: newNFTs,
       });
     }
   );
