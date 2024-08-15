@@ -49,6 +49,19 @@ app.post("/api/v1/nfts", (req, res) => {
   );
 });
 
+// Single data
+
+app.get("/api/v1/nfts/:id", (req, res) => {
+  const id = req.params.id * 1;
+  const nft = nfts.find((ele) => ele.id === id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      nft,
+    },
+  });
+});
+
 // console.log(nfts);
 const PORT = 3000;
 app.listen(PORT, () => {
