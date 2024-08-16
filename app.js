@@ -107,12 +107,13 @@
 
 ///***************************** PART-2 ****************** */
 
-const { log } = require("console");
 const express = require("express");
 const fs = require("fs");
+const morgan = require("morgan");
 
 const app = express();
 app.use(express.json());
+app.use(morgan("dev"));
 
 // CUSTOM MIDDLEWARE
 app.use((req, res, next) => {
@@ -210,19 +211,63 @@ const deleteNft = (req, res) => {
   });
 };
 
+// GET USERS
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: "failed",
+    message: "internal server error",
+  });
+};
+
+// CREATE USER
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: "failed",
+    message: "internal server error",
+  });
+};
+
+// GET SINGLE USER
+const getSingleUser = (req, res) => {
+  res.status(500).json({
+    status: "failed",
+    message: "internal server error",
+  });
+};
+
+// UPDATE USER
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: "failed",
+    message: "internal server error",
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: "failed",
+    message: "internal server error",
+  });
+};
+
 // app.get("/api/v1/nfts", getAllNfts);
 // app.post("/api/v1/nfts", createNft);
 // app.get("/api/v1/nfts/:id", getSingleNft);
 // app.patch("/api/v1/nfts/:id", updateNft);
 // app.delete("/api/v1/nfts/:id", deleteNft);
 
-app.route("/api/v1/nfts").get(getAllNfts).post(createNft);
-app
-  .route("/api/v1/nfts/:id")
-  .get(getSingleNft)
-  .patch(updateNft)
-  .delete(deleteNft);
+const nftsRouter = express.Router();
+const usersRouter = express.Router();
 
+// NFT ROUTER
+app.route("/").get(getAllNfts).post(createNft);
+app.route("/:id").get(getSingleNft).patch(updateNft).delete(deleteNft);
+// USER ROUTER
+app.route("/").get(getAllUsers).post(createUser);
+app.route("/:id").get(getSingleUser).patch(updateUser).delete(deleteUser);
+
+app.use("/api/v1/nfts", nftsRouter);
+app.use("/api/v1/users", usersRouter);
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`app running at port ${PORT}....`);
