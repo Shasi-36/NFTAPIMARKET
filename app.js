@@ -53,13 +53,14 @@ app.post("/api/v1/nfts", (req, res) => {
 
 app.get("/api/v1/nfts/:id", (req, res) => {
   const id = req.params.id * 1;
-  if (id > nfts.length) {
-    res.status(404).json({
+
+  const nft = nfts.find((ele) => ele.id === id);
+  if (!nft) {
+    return res.status(404).json({
       status: "fail",
       id: "invaid Id",
     });
   }
-  const nft = nfts.find((ele) => ele.id === id);
   res.status(200).json({
     status: "success",
     data: {

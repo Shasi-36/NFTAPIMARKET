@@ -1,1 +1,9 @@
-[{"id":0,"name":"sasi","surname":"yedindla","occupation":"MERN"},{"id":1,"name":"hari","surname":"dasari","occupation":"Data Analyst"},{"id":2,"name":"Ranjith","surname":"Dasri","occupation":"Data Engineer"},{"id":3,"name":"Chinnu","surname":"Maligi","occupation":"Senior analyst"},{"id":4,"name":"siri","surname":"maligi","occupation":"analyst"},{"id":5,"name":"praveen","surname":"dasari","occupation":"analyst"},{"id":6,"name":"raju","surname":"dasari","occupation":"analyst"}]
+[
+{"id":0,"name":"sasi","surname":"yedindla","occupation":"MERN"},
+{"id":1,"name":"hari","surname":"dasari","occupation":"Data Analyst"},
+{"id":2,"name":"Ranjith","surname":"Dasri","occupation":"Data Engineer"},
+{"id":3,"name":"Chinnu","surname":"Maligi","occupation":"Senior analyst"},
+{"id":4,"name":"siri","surname":"maligi","occupation":"analyst"},
+{"id":5,"name":"praveen","surname":"dasari","occupation":"analyst"},
+{"id":6,"name":"raju","surname":"dasari","occupation":"analyst"}
+]
