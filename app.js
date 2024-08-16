@@ -113,13 +113,17 @@ const fs = require("fs");
 
 const app = express();
 app.use(express.json());
-// app.get("/", (req, res) => {
-//   res.status(200).json({ message: "this is market api", api: "marketapi" });
-// });
 
-// app.post("/post", (req, res) => {
-//   res.status(201).json({ message: "yourdata" });
-// });
+// CUSTOM MIDDLEWARE
+app.use((req, res, next) => {
+  console.log("i am from middleware");
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 
 const nfts = JSON.parse(
   fs.readFileSync(`${__dirname}/NFTDATA/Data/nft_sample.json`)
@@ -129,6 +133,7 @@ const nfts = JSON.parse(
 const getAllNfts = (req, res) => {
   res.status(200).json({
     status: "Success",
+    Time: req.requestTime,
     result: nfts.length,
     data: {
       nfts,
