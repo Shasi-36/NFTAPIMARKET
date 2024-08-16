@@ -115,8 +115,10 @@ const usersRouter = require("./routes/userRoutes");
 
 const app = express();
 app.use(express.json());
-app.use(morgan("dev"));
 
+// SERVING TEMPLATE DEMO
+
+app.use(express.static(`${__dirname}/NFTDATA/Img`));
 // CUSTOM MIDDLEWARE
 app.use((req, res, next) => {
   console.log("i am from middleware");
