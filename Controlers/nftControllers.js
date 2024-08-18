@@ -29,6 +29,11 @@ const NFT = require("./../models/nftModel");
 //   next();
 // };
 // GET REQUEST
+
+exports.aliasTopNfts = (req, res, next) => {
+  (req.query.limit = "5"), (req.query.sort = "-ratingsAverage,price");
+  req.query.fields = "name,price,ratingsAvarage,difficulty";
+};
 exports.getAllNfts = async (req, res) => {
   try {
     // BUILD QUERY
@@ -41,6 +46,36 @@ exports.getAllNfts = async (req, res) => {
     const querStr = JSON.stringify(queryObj);
     querStr = querStr.replace(/\b(gte|gt|lte|t)\b/g, (match) => `$${match}`);
     const query = await NFT.find(JSON.parse(querStr));
+
+    // SORTING METHOD
+
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort("-createdAt");
+    }
+
+    // FIELDS LIMITING
+
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      query = query.select(fields);
+    } else {
+      query = query.select("-__V");
+    }
+
+    // PAGINATION FUNCTION
+
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 5;
+    const skip = req.query.skip(page - 1) * limit;
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const newNfts = await NFT.countDocuments();
+      if (skip >= newNfts) throw new Error("this page is doesn't exist");
+    }
     const nfts = await query;
 
     // const nfts = await NFT.find({
